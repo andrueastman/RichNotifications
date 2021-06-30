@@ -1,4 +1,4 @@
-# RichNotifications
+# Rich Notifications Test App
 
 - Register app on azure portal to obtain `AppId`, `AppSecret`, and `TenantId` values to be placed in appsettings.json
 - Ensure the app has the the `ChannelMessage.Read.All` application permission added to it on the azure portal.
