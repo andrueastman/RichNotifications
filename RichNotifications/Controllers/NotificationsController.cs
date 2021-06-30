@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Graph;
@@ -59,12 +60,15 @@ namespace RichNotifications.Controllers
                 return Ok(validationToken);
             }
 
+            // read content to string
+            var content = await new StreamReader(Request.Body).ReadToEndAsync();
+
             // handle notifications
             var graphServiceClient = GetGraphClient();
             var myTenantIds = new Guid[] { new Guid(_config.TenantId) };
             var myAppIds = new Guid[] { new Guid(_config.AppId) };
-
-            var collection = graphServiceClient.HttpProvider.Serializer.DeserializeObject<ChangeNotificationCollection>(Request.Body);
+            
+            var collection = graphServiceClient.HttpProvider.Serializer.DeserializeObject<ChangeNotificationCollection>(content);
             var areTokensValid = await collection.AreTokensValid(myTenantIds, myAppIds);
             foreach (var changeNotification in collection.Value)
             {
@@ -72,6 +76,7 @@ namespace RichNotifications.Controllers
                 if (areTokensValid)
                 {
                     Console.WriteLine($"Message time: {attachedChatMessage.CreatedDateTime}");
+                    Console.WriteLine($"Message from: {attachedChatMessage.From?.User?.DisplayName}");
                     Console.WriteLine($"Message content: {attachedChatMessage.Body.Content}");
                     Console.WriteLine();
                 }
