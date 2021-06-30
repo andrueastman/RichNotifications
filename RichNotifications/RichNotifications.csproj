@@ -9,4 +9,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\msgraph-beta-sdk-dotnet\src\Microsoft.Graph\Microsoft.Graph.Beta.csproj" />
+  </ItemGroup>
+
 </Project>

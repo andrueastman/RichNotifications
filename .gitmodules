@@ -1,0 +1,6 @@
+[submodule "msgraph-beta-sdk-dotnet"]
+	path = msgraph-beta-sdk-dotnet
+	url = https://github.com/microsoftgraph/msgraph-beta-sdk-dotnet.git
+[submodule "msgraph-sdk-dotnet-core"]
+	path = msgraph-sdk-dotnet-core
+	url = https://github.com/microsoftgraph/msgraph-sdk-dotnet-core.git
