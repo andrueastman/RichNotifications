@@ -72,7 +72,7 @@ namespace RichNotifications.Controllers
             var areTokensValid = await collection.AreTokensValid(myTenantIds, myAppIds);
             foreach (var changeNotification in collection.Value)
             {
-                var attachedChatMessage = await changeNotification.EncryptedContent.Decrypt<ChatMessage>((id, thumbprint) => Task.FromResult(this._certificate));
+                var attachedChatMessage = await changeNotification.EncryptedContent.DecryptAsync<ChatMessage>((id, thumbprint) => Task.FromResult(this._certificate));
                 if (areTokensValid)
                 {
                     Console.WriteLine($"Message time: {attachedChatMessage.CreatedDateTime}");
